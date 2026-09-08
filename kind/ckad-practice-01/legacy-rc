@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: legacy-rc
+spec:
+  replicas: 2
+  selector:
+    app: legacy
+  template:
+    metadata:
+      name: httpd
+      labels:
+        app: legacy
+    spec:
+      containers:
+      - name: httpd
+        image: httpd:2.4
+        ports:
+        - containerPort: 80
+

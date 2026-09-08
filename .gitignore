@@ -1,0 +1,12 @@
+# Secrets & machine-specific files — never commit these.
+.gitconfig.local
+.zshrc.local
+*.local
+
+# SSH keys / credentials (in case anything lands here by accident)
+id_*
+*.pem
+*.key
+
+# macOS
+.DS_Store

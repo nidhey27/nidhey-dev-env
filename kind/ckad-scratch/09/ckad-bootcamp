@@ -1,0 +1,9 @@
+apiVersion: training.example.com/v1
+kind: Workshop
+metadata:
+  name: ckad-bootcamp
+  namespace: cipher
+spec:
+  topic: kubernetes
+  trainer: nidhey
+  seats: 12

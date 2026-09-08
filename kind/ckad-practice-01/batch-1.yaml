@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: batch-1
+  name: batch-1
+spec:
+  containers:
+  - image: nginx:1.25
+    name: batch-1
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+  tolerations:
+  - key: "workload"
+    operator: "Equal"
+    value: "batch"
+    effect: "NoSchedule"
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: kubernetes.io/hostname
+            operator: In
+            values:
+            - multi-node-cluster-worker4
+status: {}

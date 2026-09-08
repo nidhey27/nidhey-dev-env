@@ -1,0 +1,13 @@
+[settings]
+
+[settings.ruby]
+compile = false
+
+[tools]
+colima = "latest"
+copier = "latest"
+glab = "latest"
+pipx = "latest"
+python = "3.14"
+docker-cli = "latest"
+k3d = "latest"

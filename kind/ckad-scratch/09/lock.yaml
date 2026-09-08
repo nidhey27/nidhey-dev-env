@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: locked-down
+  name: locked-down
+spec:
+  securityContext:
+    runAsUser: 4000
+    runAsGroup: 4000
+  containers:
+  - command:
+    - sleep
+    - "3600"
+    image: busybox:1.36
+    name: locked-down
+    securityContext:
+      capabilities:
+        drop: ["ALL"]
+        add: ["CHOWN"]
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}

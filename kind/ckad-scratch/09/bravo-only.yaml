@@ -1,0 +1,15 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  creationTimestamp: "2026-08-19T15:27:27Z"
+  name: bravo-only
+  namespace: sentry
+  resourceVersion: "689049"
+  uid: 6a53258c-1017-450a-9724-40a147f5b80a
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - pods
+  verbs:
+  - get

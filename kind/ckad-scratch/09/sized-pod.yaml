@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: sized-pod
+  name: sized-pod
+spec:
+  containers:
+  - image: nginx:1.25
+    name: sized-pod
+    resources: 
+      requests:
+        memory: "64Mi"
+        cpu: "250m"
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: notoken
+  name: notoken
+spec:
+  serviceAccountName: notoken-sa
+  containers:
+  - image: nginx:1.25
+    name: notoken
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}

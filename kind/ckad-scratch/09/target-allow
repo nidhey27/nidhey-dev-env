@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: target-allow
+spec:
+  podSelector:
+    matchLabels:
+      app: taregt
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          role: friend
+    ports:
+    - protocol: TCP
+      port: 8080

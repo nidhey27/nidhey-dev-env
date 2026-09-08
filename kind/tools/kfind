@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+# kfind - answer "where the hell does this field go?"
+#
+# STUDY AID ONLY - this will NOT exist in the CKAD exam terminal. Use it while
+# practising to build the intuition, then lean on `kubectl explain pod.spec`
+# (non-recursive) + the docs on exam day. See tools/spec-map.md.
+#
+# Usage:  kfind <kind> <field-substring>
+#   kfind deployment tolerations
+#   kfind pod runAsUser
+#   kfind deploy maxSurge
+#   kfind cronjob backoffLimit
+#
+# Prints the FULL dotted path to every matching field, so you never again have to
+# count indentation in `kubectl explain --recursive` output.
+set -uo pipefail
+
+if [ $# -lt 2 ]; then
+  sed -n '2,11p' "$0" | sed 's/^# \{0,1\}//'
+  exit 1
+fi
+
+KIND=$1
+NEEDLE=$2
+
+kubectl explain "$KIND" --recursive 2>/dev/null | awk -v needle="$NEEDLE" '
+  /^FIELDS:/ { infields = 1; next }
+  !infields  { next }
+
+  # Field lines look like:  "        tolerations\t<[]Toleration>"
+  match($0, /^[ ]+[A-Za-z0-9_]+\t</) {
+    # depth from leading spaces (2 spaces per level)
+    indent = match($0, /[^ ]/) - 1
+    level  = int(indent / 2)
+
+    line = $0
+    sub(/^[ ]+/, "", line)
+    split(line, parts, "\t")
+    name = parts[1]
+    type = parts[2]
+
+    path[level] = name
+    for (i = level + 1; i <= maxlevel; i++) delete path[i]
+    maxlevel = level
+
+    if (tolower(name) ~ tolower(needle)) {
+      full = ""
+      for (i = 1; i <= level; i++) full = (full == "" ? path[i] : full "." path[i])
+      printf "  %-62s %s\n", full, type
+    }
+  }
+' | sort -u
+
+exit 0

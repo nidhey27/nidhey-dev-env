@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: edge-pod
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: color
+            operator: In
+            values:
+            - red
+            - blue
+  containers:
+  - name: nginx
+    image: nginx:1.25
+  tolerations:
+  - key: "color"
+    operator: "Equal"
+    value: "red"
+    effect: "NoSchedule"
+  - key: "color"
+    operator: "Equal"
+    value: "blue"
+    effect: "NoSchedule"

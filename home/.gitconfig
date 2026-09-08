@@ -1,0 +1,20 @@
+# Shared git configuration (safe to commit).
+# Your identity (name/email) lives in ~/.gitconfig.local, which is NOT
+# committed. install.sh creates it for you on a new machine.
+[include]
+	path = ~/.gitconfig.local
+
+[init]
+	defaultBranch = main
+
+[pull]
+	rebase = true
+
+[push]
+	autoSetupRemote = true
+
+[fetch]
+	prune = true
+
+[core]
+	editor = vim
