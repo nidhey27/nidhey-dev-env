@@ -21,7 +21,7 @@ change a dotfile.
 1. Installs **Homebrew** (if missing).
 2. Installs everything in [`Brewfile`](./Brewfile) via `brew bundle`.
 3. Installs **oh-my-zsh** and these plugins: `zsh-autosuggestions`,
-   `zsh-syntax-highlighting`, `fast-syntax-highlighting`, `zsh-autocomplete`.
+   `zsh-syntax-highlighting`.
 4. **Symlinks** everything under [`home/`](./home) into `$HOME`
    (existing files are backed up to `~/.dotfiles-backup/<timestamp>/`).
 5. Creates `~/.gitconfig.local` with your git identity (not committed).
@@ -47,7 +47,8 @@ Depend on `kubectl`, `kubectx`, and `fzf` (all in the Brewfile).
 | Alias / fn | Expands to | Example |
 |------------|-----------|---------|
 | `k` | `kubectl` | `k get pods` |
-| `kc` | `kubectl config` | `kc use-context prod` |
+| `kc` | `kubectl config use-context` | `kc prod` |
+| `kns` | `kubectl config set-context --current --namespace` | `kns gitlab` |
 | `kx` | `kubectx` — switch **context** (cluster) | `kx` (picker) / `kx prod` |
 | `kn` | `kubens` — switch **namespace** | `kn` (picker) / `kn kube-system` |
 | `kpod <pat>` | pod names matching `<pat>` | `kpod api` |

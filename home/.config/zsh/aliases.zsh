@@ -11,10 +11,11 @@
 # k — the workhorse. `k get pods`, `k apply -f x.yaml`, etc.
 alias k="kubectl"
 
-# kc — kubectl config. Manage contexts/clusters/users.
-#   kc get-contexts        list all contexts
-#   kc use-context <ctx>   switch context
-alias kc="kubectl config"
+# kc — switch context.   kc <ctx>
+alias kc="kubectl config use-context"
+
+# kns — set namespace on the current context.   kns <ns>
+alias kns="kubectl config set-context --current --namespace"
 
 # kx — switch kube CONTEXT (which cluster you talk to).
 #   kx            interactive picker (fzf) of all contexts

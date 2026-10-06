@@ -74,8 +74,6 @@ install_oh_my_zsh() {
   }
   clone_plugin zsh-autosuggestions      https://github.com/zsh-users/zsh-autosuggestions
   clone_plugin zsh-syntax-highlighting  https://github.com/zsh-users/zsh-syntax-highlighting
-  clone_plugin fast-syntax-highlighting https://github.com/zdharma-continuum/fast-syntax-highlighting
-  clone_plugin zsh-autocomplete         https://github.com/marlonrichert/zsh-autocomplete
 }
 
 # --- 4. Symlink dotfiles --------------------------------------------------
